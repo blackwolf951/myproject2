@@ -1,0 +1,550 @@
+/*  CSS設定  */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+header, footer {
+    background-color: #01814a;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 30px 0 20px 50px;
+}
+
+section {
+    background-color: #d6ccc2;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 30px 0 20px 50px;
+    right: 5vw;
+}
+
+section img {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 30px 50px 20px 50px;
+    right: 5vw;
+    border: 1px solid #3d3d40;
+    border-radius: 20px;
+}
+
+header ul {
+    position: absolute;
+    right: 5vw;
+    top: 0;
+    line-height: 120px;
+}
+
+header li {
+    display: inline;
+    margin-right: 4vw;
+}
+
+main {
+    background-color: #BEBEBE;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 30px 0 400px 50px;
+}
+
+#sensor1:hover, #sensor2:hover, #sensor3:hover {
+    border: 1px solid #ff0000;
+    border-radius: 20px;
+}
+
+#sensor-container {
+    padding: 50px 100px 50px 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    max-width: 600px;
+    max-height: 300px;
+    margin-right: 4vw;
+}
+
+#sensor1, #sensor2, #sensor3 {
+    background-color: #ffffff;
+    padding: 20px 60px;
+    margin: 5px;
+    border: 5px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 針對 558px 寬度的設備進行調整 */
+@media (max-width: 558px) {
+    header {
+        padding: 160px 0 10px 20px;
+    }
+    footer {
+        padding: 50px 0 10px 20px;
+    }
+    section {
+        padding: 20px 0 10px 20px;
+    }
+
+    section img {
+        padding: 20px 20px 0px 20px;
+        width: 100px;
+        height: 100px;
+    }
+    header h1 {
+        left: 2vw; /* 调整此值以适应需要 */
+        position: absolute;
+        list-style: none; /* 移除项目符号 */
+        display: flex; /* 水平排列项目 */
+        gap: 2vw; /* 项目之间的间距 */
+    }
+    header h1:first-of-type {
+        
+        top: 10%; /* 垂直居中 */
+        transform: translateY(-360%); /* 垂直居中 */
+        
+    }
+    header h1:last-of-type {
+        
+        top: 10%; /* 垂直居中 */
+        transform: translateY(-140%); /* 垂直居中 */
+        
+    }
+
+    header ul {
+        left: 2vw; /* 调整此值以适应需要 */
+        top: 15%; /* 垂直居中 */
+        transform: translateY(-130%); /* 垂直居中 */
+        position: absolute;
+        list-style: none; /* 移除项目符号 */
+        display: flex; /* 水平排列项目 */
+        gap: 2vw; /* 项目之间的间距 */
+    }
+
+    header li {
+        margin-right: 2vw;
+        margin-top: 10px; 
+        
+    }
+
+    main {
+        padding: 20px 0 200px 20px;
+    }
+
+    #sensor-container {
+        padding: 20px 50px 20px 5px;
+        max-width: 300px;
+        max-height: 150px;
+    }
+
+    #sensor1, #sensor2, #sensor3 {
+        padding: 10px 30px;
+        margin: 2px;
+    }
+}
+
+@media (max-width: 430px) {
+    header {
+        padding: 200px 0 10px 20px;
+    }
+
+    footer {
+        padding: 50px 0 10px 20px;
+    }
+
+    section {
+        padding: 20px 0 10px 20px;
+    }
+
+        section img {
+            padding: 20px 20px 0px 20px;
+            width: 100px;
+            height: 100px;
+        }
+
+    header h1 {
+        left: 2vw; /* 调整此值以适应需要 */
+        position: absolute;
+        list-style: none; /* 移除项目符号 */
+        display: flex; /* 水平排列项目 */
+        gap: 2vw; /* 项目之间的间距 */
+    }
+
+        header h1:first-of-type {
+            top: 10%; /* 垂直居中 */
+            transform: translateY(-160%); /* 垂直居中 */
+        }
+
+        header h1:last-of-type {
+            top: 10%; /* 垂直居中 */
+            transform: translateY(-20%); /* 垂直居中 */
+        }
+
+    header ul {
+        left: 2vw; /* 调整此值以适应需要 */
+        top: 15%; /* 垂直居中 */
+        transform: translateY(-10%); /* 垂直居中 */
+        position: absolute;
+        list-style: none; /* 移除项目符号 */
+        display: flex; /* 水平排列项目 */
+        gap: 2vw; /* 项目之间的间距 */
+    }
+
+    header li {
+        margin-right: 2vw;
+        margin-top: 5px;
+    }
+
+    main {
+        padding: 20px 0 200px 20px;
+    }
+
+    #sensor-container {
+        padding: 20px 50px 20px 5px;
+        max-width: 300px;
+        max-height: 150px;
+    }
+
+    #sensor1, #sensor2, #sensor3 {
+        padding: 10px 30px;
+        margin: 2px;
+    }
+}
+
+@media (max-width: 430px) {
+    header {
+        padding: 160px 0 10px 20px;
+    }
+
+    footer {
+        padding: 50px 0 10px 20px;
+    }
+
+    section {
+        padding: 20px 0 10px 20px;
+    }
+
+        section img {
+            padding: 20px 20px 0px 20px;
+            width: 100px;
+            height: 100px;
+        }
+
+    header h1 {
+        left: 2vw; /* 调整此值以适应需要 */
+        position: absolute;
+        list-style: none; /* 移除项目符号 */
+        display: flex; /* 水平排列项目 */
+        gap: 2vw; /* 项目之间的间距 */
+    }
+
+        header h1:first-of-type {
+            top: 10%; /* 垂直居中 */
+            transform: translateY(-180%); /* 垂直居中 */
+        }
+
+        header h1:last-of-type {
+            top: 10%; /* 垂直居中 */
+            transform: translateY(-35%); /* 垂直居中 */
+        }
+
+    header ul {
+        left: 2vw; /* 调整此值以适应需要 */
+        top: 15%; /* 垂直居中 */
+        transform: translateY(-40%); /* 垂直居中 */
+        position: absolute;
+        list-style: none; /* 移除项目符号 */
+        display: flex; /* 水平排列项目 */
+        gap: 2vw; /* 项目之间的间距 */
+    }
+
+    header li {
+        margin-right: 2vw;
+        margin-top: 5px;
+    }
+
+    main {
+        padding: 20px 0 200px 20px;
+    }
+
+    #sensor-container {
+        padding: 20px 50px 20px 5px;
+        max-width: 300px;
+        max-height: 150px;
+    }
+
+    #sensor1, #sensor2, #sensor3 {
+        padding: 10px 30px;
+        margin: 2px;
+    }
+
+    @media (max-width: 414px) {
+        header {
+            padding: 160px 0 10px 20px;
+        }
+
+        footer {
+            padding: 50px 0 10px 20px;
+        }
+
+        section {
+            padding: 20px 0 10px 20px;
+        }
+
+            section img {
+                padding: 20px 20px 0px 20px;
+                width: 100px;
+                height: 100px;
+            }
+
+        header h1 {
+            left: 2vw; /* 调整此值以适应需要 */
+            position: absolute;
+            list-style: none; /* 移除项目符号 */
+            display: flex; /* 水平排列项目 */
+            gap: 2vw; /* 项目之间的间距 */
+        }
+
+            header h1:first-of-type {
+                top: 10%; /* 垂直居中 */
+                transform: translateY(-200%); /* 垂直居中 */
+            }
+
+            header h1:last-of-type {
+                top: 10%; /* 垂直居中 */
+                transform: translateY(-60%); /* 垂直居中 */
+            }
+
+        header ul {
+            left: 2vw; /* 调整此值以适应需要 */
+            top: 15%; /* 垂直居中 */
+            transform: translateY(-40%); /* 垂直居中 */
+            position: absolute;
+            list-style: none; /* 移除项目符号 */
+            display: flex; /* 水平排列项目 */
+            gap: 2vw; /* 项目之间的间距 */
+        }
+
+        header li {
+            margin-right: 2vw;
+            margin-top: 5px;
+        }
+
+        main {
+            padding: 20px 0 200px 20px;
+        }
+
+        #sensor-container {
+            padding: 20px 50px 20px 5px;
+            max-width: 300px;
+            max-height: 150px;
+        }
+
+        #sensor1, #sensor2, #sensor3 {
+            padding: 10px 30px;
+            margin: 2px;
+        }
+    }
+
+    @media (max-width: 375px) {
+        header {
+            padding: 160px 0 10px 20px;
+        }
+
+        footer {
+            padding: 50px 0 10px 20px;
+        }
+
+        section {
+            padding: 20px 0 10px 20px;
+        }
+
+            section img {
+                padding: 20px 20px 0px 20px;
+                width: 100px;
+                height: 100px;
+            }
+
+        header h1 {
+            left: 2vw; /* 调整此值以适应需要 */
+            position: absolute;
+            list-style: none; /* 移除项目符号 */
+            display: flex; /* 水平排列项目 */
+            gap: 2vw; /* 项目之间的间距 */
+        }
+
+            header h1:first-of-type {
+                top: 10%; /* 垂直居中 */
+                transform: translateY(-160%); /* 垂直居中 */
+            }
+
+            header h1:last-of-type {
+                top: 10%; /* 垂直居中 */
+                transform: translateY(-20%); /* 垂直居中 */
+            }
+
+        header ul {
+            left: 2vw; /* 调整此值以适应需要 */
+            top: 15%; /* 垂直居中 */
+            transform: translateY(-10%); /* 垂直居中 */
+            position: absolute;
+            list-style: none; /* 移除项目符号 */
+            display: flex; /* 水平排列项目 */
+            gap: 2vw; /* 项目之间的间距 */
+        }
+
+        header li {
+            margin-right: 2vw;
+            margin-top: 5px;
+        }
+
+        main {
+            padding: 20px 0 200px 20px;
+        }
+
+        #sensor-container {
+            padding: 20px 50px 20px 5px;
+            max-width: 300px;
+            max-height: 150px;
+        }
+
+        #sensor1, #sensor2, #sensor3 {
+            padding: 10px 30px;
+            margin: 2px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        header {
+            padding: 160px 0 10px 20px;
+        }
+
+        footer {
+            padding: 50px 0 10px 20px;
+        }
+
+        section {
+            padding: 20px 0 10px 20px;
+        }
+
+            section img {
+                padding: 20px 20px 0px 20px;
+                width: 100px;
+                height: 100px;
+            }
+
+        header h1 {
+            left: 2vw; /* 调整此值以适应需要 */
+            position: absolute;
+            list-style: none; /* 移除项目符号 */
+            display: flex; /* 水平排列项目 */
+            gap: 2vw; /* 项目之间的间距 */
+        }
+
+            header h1:first-of-type {
+                top: 10%; /* 垂直居中 */
+                transform: translateY(-160%); /* 垂直居中 */
+            }
+
+            header h1:last-of-type {
+                top: 10%; /* 垂直居中 */
+                transform: translateY(-20%); /* 垂直居中 */
+            }
+
+        header ul {
+            left: 2vw; /* 调整此值以适应需要 */
+            top: 5%; /* 垂直居中 */
+            transform: translateY(40%); /* 垂直居中 */
+            position: absolute;
+            list-style: none; /* 移除项目符号 */
+            display: flex; /* 水平排列项目 */
+            gap: 2vw; /* 项目之间的间距 */
+        }
+
+        header li {
+            margin-right: 2vw;
+            margin-top: 5px;
+        }
+
+        main {
+            padding: 20px 0 200px 20px;
+        }
+
+        #sensor-container {
+            padding: 20px 50px 20px 5px;
+            max-width: 300px;
+            max-height: 150px;
+        }
+
+        #sensor1, #sensor2, #sensor3 {
+            padding: 10px 30px;
+            margin: 2px;
+        }
+    }
+}
+
+
+@media (max-width: 393px) {
+    header {
+        padding: 180px 0 10px 20px;
+    }
+
+    footer {
+        padding: 50px 0 10px 20px;
+    }
+
+    section {
+        padding: 20px 0 10px 20px;
+    }
+
+        section img {
+            padding: 20px 20px 0px 20px;
+            width: 100px;
+            height: 100px;
+        }
+
+    header h1 {
+        left: 2vw; /* 调整此值以适应需要 */
+        position: absolute;
+        list-style: none; /* 移除项目符号 */
+        display: flex; /* 水平排列项目 */
+        gap: 2vw; /* 项目之间的间距 */
+    }
+
+        header h1:first-of-type {
+            top: 10%; /* 垂直居中 */
+            transform: translateY(-130%); /* 垂直居中 */
+        }
+
+        header h1:last-of-type {
+            top: 10%; /* 垂直居中 */
+            transform: translateY(-20%); /* 垂直居中 */
+        }
+
+    header ul {
+        left: 2vw; /* 调整此值以适应需要 */
+        top: 5%; /* 垂直居中 */
+        transform: translateY(40%); /* 垂直居中 */
+        position: absolute;
+        list-style: none; /* 移除项目符号 */
+        display: flex; /* 水平排列项目 */
+        gap: 2vw; /* 项目之间的间距 */
+    }
+
+    header li {
+        margin-right: 2vw;
+        margin-top: 5px;
+    }
+
+    main {
+        padding: 20px 0 200px 20px;
+    }
+
+    #sensor-container {
+        padding: 20px 50px 20px 5px;
+        max-width: 300px;
+        max-height: 150px;
+    }
+
+    #sensor1, #sensor2, #sensor3 {
+        padding: 10px 30px;
+        margin: 2px;
+    }
+}
+

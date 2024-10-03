@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>義守大學尿液警網頁</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /*  CSS設定  */
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        header, footer {
+            background-color: #01814a;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 30px 0 20px 50px;
+        }
+
+        section {
+            background-color: #d6ccc2;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 30px 0 20px 50px;
+            right: 5vw;
+        }
+
+        section img {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 30px 50px 20px 50px;
+            right: 5vw;
+            border: 1px solid #3d3d40;
+            border-radius: 20px;
+        }
+
+        header ul {
+            position: absolute;
+            right: 5vw;
+            top: 0;
+            line-height: 120px;
+        }
+
+        header li {
+            display: inline;
+            margin-right: 4vw;
+        }
+
+        main {
+            background-color: #BEBEBE;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 30px 0 400px 50px;
+        }
+
+        #sensor1:hover, #sensor2:hover, #sensor3:hover {
+            border: 1px solid #ff0000;
+            border-radius: 20px;
+        }
+
+        #sensor-container {
+            padding: 50px 100px 50px 10px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            max-width: 600px;
+            max-height: 300px;
+            margin-right: 4vw;
+        }
+
+        #sensor1, #sensor2, #sensor3 {
+            background-color: #ffffff;
+            padding: 20px 60px;
+            margin: 5px;
+            border: 5px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>義守大學尿液警網頁</h1>
+        <h1>I-Shou University Urine Alert Website</h1>
+        <nav>
+            <ul>
+                <li><a href="http://www.iding.url.tw/yellowpage/index.html">瞭解更多</a></li>
+                <li><a href="http://www.iding.url.tw/yellowpage/index.html">關於我們</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>尿布目前狀態</h2>
+        <h2>I-Shou Urine Alert</h2>
+
+        <div id="sensor-container">
+            <div id="sensor1"></div>
+            <div id="sensor2"></div>
+            <div id="sensor3"></div>
+        </div>
+
+        <h2>這裡是說明狀態</h2>
+        <p>1.當數值在0~20表示正常範圍-顯示白色</p>
+        <p>2.當數值在21~70表示警示範圍-顯示黃色</p>
+        <p>3.當數值在70以上表示要更換尿布-紅藍閃爍</p>
+    </main>
+
+    <script>
+        function refreshHumidity() {
+            fetch('http://140.127.196.233:9999/isu/isu_school/wen/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('sensor1').textContent = `當前濕度 sensor1: ${data.humidity1}%`;
+                    document.getElementById('sensor2').textContent = `當前濕度 sensor2: ${data.humidity2}%`;
+                    document.getElementById('sensor3').textContent = `當前濕度 sensor3: ${data.humidity3}%`;
+
+                    console.log('Humidity data:', data);
+                    updateSensorColor(document.getElementById('sensor1'), data.humidity1);
+                    updateSensorColor(document.getElementById('sensor2'), data.humidity2);
+                    updateSensorColor(document.getElementById('sensor3'), data.humidity3);
+                })
+                .catch(error => {
+                    console.error('Error fetching humidity data:', error);
+                });
+        }
+
+        function updateSensorColor(sensorElement, humidityValue) {
+            let isRed = false;
+            let flashingInterval;
+
+            if (humidityValue >= 0 && humidityValue <= 20) {
+                clearInterval(flashingInterval);
+                sensorElement.style.backgroundColor = 'white';
+            } else if (humidityValue >= 21 && humidityValue <= 70) {
+                sensorElement.style.backgroundColor = 'yellow';
+            } else if (humidityValue >= 71 && humidityValue < 101) {
+                let flashCount = 0;
+
+                flashingInterval = setInterval(() => {
+                    if (isRed) {
+                        sensorElement.style.backgroundColor = 'red';
+                    } else {
+                        sensorElement.style.backgroundColor = 'blue';
+                    }
+                    isRed = !isRed;
+
+                    flashCount++;
+
+                    if (flashCount >= 2) {
+                        clearInterval(flashingInterval);
+                        sensorElement.style.backgroundColor = 'red';
+                    }
+                }, 1500);
+            }
+        }
+
+        refreshHumidity();
+        setInterval(refreshHumidity, 1000);
+    </script>
+
+    <article>
+        <section>
+            <img src="pic/6.jpg" alt="ISU" width="150" height="150" />
+            <img src="pic/8.jpg" alt="ISU" width="150" height="150" />
+            <img src="pic/14.jpg" alt="ISU" width="150" height="150" />
+        </section>
+    </article>
+    <footer>
+        <p>這邊是網頁最底下拉</p>
+    </footer>
+</body>
+</html>
