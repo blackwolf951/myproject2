@@ -1,5 +1,5 @@
 // mqtt_api.dart
-import 'dart:async'; // 引入 async 库
+import 'dart:async'; // 引入 async 庫
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -10,12 +10,12 @@ import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_router/shelf_router.dart' as shelf_router;
 import 'package:shelf_cors_headers/shelf_cors_headers.dart'; // 保留
 import 'package:shared_preferences/shared_preferences.dart';
-import 'sqlite_db.dart'; // 替换 CSV 为 SQLite 数据库
-import 'ip_info_page.dart'; // 引入 IP 信息页面
-import 'pass_io.dart'; // 引入登录页面
+import 'sqlite_db.dart'; //  SQLite 資料庫
+import 'ip_info_page.dart'; // 引入 IP 訊息方便做固定IP NAT5轉發
+import 'pass_io.dart'; // 引入登入介面
 import 'package:intl/intl.dart'; // 引入 intl 包
 
-final Map<String, String> messages = {}; // 存储 MQTT 的消息
+final Map<String, String> messages = {}; // 存儲 MQTT 的消息
 final List<String> topics = [
   'isu/esp32s_Hellow',
   'isu/esp32s_1/wen/soilmoisture_1',
@@ -74,13 +74,13 @@ class _MyHomePageState extends State<MyHomePage> {
         print("MQTT Message: $pt");
 
         final DateTime currentTime = DateTime.now();
-        // 修改为：只保留小时、分钟、秒，精确到小数点后6位
+        // 留小時、分鐘、秒，精確到小數點後6位
         final String currentTimeStr = DateFormat('HH:mm:ss.SSSSSS').format(currentTime);
 
-        // mqtt_received_timestamp，也只保留小时、分钟、秒，精确到小数点后6位
+        // mqtt_received_timestamp，留小時、分鐘、秒，精確到小數點後6位
         final String mqttReceiveTimestampStr = DateFormat('HH:mm:ss.SSSSSS').format(currentTime);
 
-        // 处理消息内容和时间戳
+        // 處理消息内容和時間戳
         String mqttDelay = "N/A";
         String messageContent = pt;
         String mqttSentTimestampStr = "N/A";
@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if (mqttMessageParts.length == 2) {
             try {
               final DateTime mqttSentTime = DateTime.parse(mqttMessageParts[1]);
-              // mqtt_sent_timestamp，也只保留小时、分钟、秒，精确到小数点后6位
+              // mqtt_sent_timestamp，留小時、分鐘、秒，精確到小數點後6位
               mqttSentTimestampStr = DateFormat('HH:mm:ss.SSSSSS').format(mqttSentTime);
               mqttDelay = (currentTime.difference(mqttSentTime).inMicroseconds / 1000000).toStringAsFixed(6);
             } catch (e) {
@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onDisconnected() {
     print('Disconnected');
-    _connectMQTT(); // 自动重连
+    _connectMQTT(); // 自動重連(避免斷線
   }
 
   void _onConnected() {
@@ -154,13 +154,13 @@ class _MyHomePageState extends State<MyHomePage> {
   void _publishZeroToAllTopics() async {
     allMessagesReceivedCompleter = Completer<void>();
 
-    // 发送 MQTT 消息
+    // 發送 MQTT 消息
     _publishMessage('0');
 
-    // 发送 API 请求
+    // 發送 API 請求
     _triggerApiCall();
 
-    // 等待所有主题的消息更新
+    // 等待所有主題的消息更新
     try {
       await allMessagesReceivedCompleter!.future.timeout(Duration(seconds: 5));
     } catch (e) {
@@ -168,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  // 发送 API 请求
+  // 發送 API 請求
   void _triggerApiCall() async {
     final client = HttpClient();
     try {
@@ -179,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
         final decodedData = jsonDecode(responseBody);
 
         setState(() {
-          messages['API Data'] = decodedData.toString(); // 将整个 API 数据显示
+          messages['API Data'] = decodedData.toString(); // 將整個 API 數據顯示
         });
         print('API Response: $decodedData');
       } else {
@@ -306,14 +306,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-// API 服务器
+// API 伺服器
 void startApiServer() async {
   final app = shelf_router.Router();
 
   app.get('/isu/wen/school/idi/api/data', (Request request) async {
     final stopwatch = Stopwatch()..start();
 
-    // 记录 API 请求的时间
+    // 紀錄 API 請求的時間
     final DateTime apiSentTime = DateTime.now();
     final String apiSentTimestampStr = DateFormat('HH:mm:ss.SSSSSS').format(apiSentTime);
 
@@ -343,7 +343,7 @@ void startApiServer() async {
       'mqtt_topic': 'API Data',
       'api_data': 'API Data',
       'value': 'API Response',
-      'mqtt_sent_timestamp': apiSentTimestampStr, // 记录发送时间
+      'mqtt_sent_timestamp': apiSentTimestampStr, // 紀錄發送時間
       'mqtt_received_timestamp': apiResponseTime,
       'api_elapsed_microseconds': apiElapsedMicroseconds.toString(),
       'mqtt_response_time': 'N/A',
