@@ -1,9 +1,9 @@
 // sqlite_db.dart
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart'; // 用于操作路径
-import 'dart:io'; // 用于打开 Windows 文件夹
-import 'package:url_launcher/url_launcher.dart'; // 用于在 Windows 打开文件夹
+import 'package:path/path.dart'; // 用於操作路徑
+import 'dart:io'; // 打开 Windows 文件夹
+import 'package:url_launcher/url_launcher.dart'; // 用於在 Windows 打开資料夾
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
@@ -23,10 +23,10 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    // 指定数据库存放在 C:\MQTT_API_ISU_WEN 路径下
+    // 指定資料存放在 C:\MQTT_API_ISU_WEN 路徑下
     String path = 'C:/MQTT_API_ISU_WEN/mqtt_data.db';
 
-    // 如果目录不存在，创建目录
+    // 如果文件資料夾不存在，創建文件資料夾
     final directory = Directory('C:/MQTT_API_ISU_WEN');
     if (!await directory.exists()) {
       await directory.create(recursive: true);
@@ -73,7 +73,7 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> getAllData() async {
     final db = await database;
     return await db.query('data',
-        orderBy: 'mqtt_received_timestamp DESC'); // 按接收时间倒序排序
+        orderBy: 'mqtt_received_timestamp DESC'); // 按造接收時間倒序排序
   }
 
   Future<void> deleteAllData() async {
@@ -100,18 +100,18 @@ class _SqlitePageState extends State<SqlitePage> {
     final dbHelper = DatabaseHelper();
     final data = await dbHelper.getAllData();
     setState(() {
-      _data = List.from(data); // 确保 _data 是一个可变的列表
+      _data = List.from(data); // 確保 _data 是一个可變的列表
     });
   }
 
   Future<void> _clearPageData() async {
     setState(() {
-      _data.clear(); // 清除页面显示的数据
+      _data.clear(); // 清除頁面顯示的數據
     });
   }
 
   Future<void> _reloadPageData() async {
-    _loadDataFromDatabase(); // 重新加载数据并显示在页面上
+    _loadDataFromDatabase(); // 重新加載數據据並顯示在頁面上
   }
 
   Future<void> _openDatabaseFolder() async {
@@ -137,24 +137,24 @@ class _SqlitePageState extends State<SqlitePage> {
         actions: [
           IconButton(
             icon: Icon(Icons.delete),
-            onPressed: _clearPageData, // 清除页面显示的数据
+            onPressed: _clearPageData, // 清除頁面的顯示數據
           ),
           IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: _reloadPageData, // 重新加载数据并显示
+            onPressed: _reloadPageData, // 重新加載數據並顯示
           ),
           IconButton(
             icon: Icon(Icons.folder),
             onPressed: () async {
-              const folderPath = 'C:/MQTT_API_ISU_WEN'; // 你想要打开的文件夹路径
+              const folderPath = 'C:/MQTT_API_ISU_WEN'; // 你想要打開的資料夾路徑
               final uri = Uri.file(folderPath); // 使用 Uri.file() 生成合法的 URI
 
               if (await canLaunch(uri.toString())) {
-                await launch(uri.toString()); // 打开指定文件夹
+                await launch(uri.toString()); // 打開指定資料夾
               } else {
                 print('Cannot open folder: $folderPath');
               }
-            }, // 打开Windows文件夹，显示数据库位置
+            }, // 打开Windows資料夾，顯示資料庫位置
           ),
         ],
       ),
